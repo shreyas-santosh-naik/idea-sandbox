@@ -44,6 +44,12 @@ body {
     color: var(--text-light);
     background-color: var(--bg-dark-primary);
     overflow-x: hidden;
+    /* Styles for centering */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Solution for fixed header covering content */
+    padding-top: 90px;
 }
 
 .container {
@@ -147,16 +153,8 @@ p {
     100% { transform: translateY(-100vh); opacity: 0; }
 }
 
-.animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-    animation: scaleIn 0.8s ease-out forwards;
-}
-
-.animate-fade-in-left {
-    animation: fadeInLeft 0.8s ease-out forwards;
+.animate-fade-in-up, .animate-scale-in, .animate-fade-in-left {
+    opacity: 0;
 }
 
 .delay-200 {
@@ -169,17 +167,17 @@ p {
 
 /* Header */
 .header {
-    background-color: #50E3C2; /* Your specified color */
-    backdrop-filter: blur(8px); /* Glassmorphism effect */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glass effect */
+    background-color: #50E3C2;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding: 20px 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    transition: all 0.3s ease; /* Smooth transition for animations */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
 .header:hover {
@@ -196,7 +194,7 @@ p {
 
 .header .logo img {
     height: 40px;
-    filter: brightness(0.9) drop-shadow(0 0 5px rgba(0,255,255,0.5)); /* Adjust logo to fit new header color */
+    filter: brightness(0.9) drop-shadow(0 0 5px rgba(0,255,255,0.5));
 }
 
 .nav-list {
@@ -206,28 +204,28 @@ p {
 }
 
 .nav-list a {
-    color: var(--bg-dark-primary); /* Changed to dark primary for contrast */
+    color: var(--bg-dark-primary);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .nav-list a:hover {
-    color: var(--secondary-color); /* Hover color */
+    color: var(--secondary-color);
 }
 
 .nav-cta {
-    background-color: var(--secondary-color); /* Changed for contrast */
-    color: var(--text-light); /* Changed for contrast */
+    background-color: var(--secondary-color);
+    color: var(--text-light);
     padding: 8px 16px;
     border-radius: 50px;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(140, 153, 247, 0.4); /* Shadow for secondary CTA */
+    box-shadow: 0 4px 10px rgba(140, 153, 247, 0.4);
 }
 
 .nav-cta:hover {
-    background-color: #7985e1; /* Darker secondary on hover */
+    background-color: #7985e1;
     transform: translateY(-2px);
 }
 
@@ -579,6 +577,35 @@ p {
 .form-submit-btn {
     width: 100%;
     margin-top: 10px;
+}
+
+/* --- Success Page Styles --- */
+.success-page {
+    background-color: var(--bg-dark-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.success-page .glass-card {
+    padding: 60px 40px;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.success-message {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+.text-center {
+  text-align: center;
 }
 
 /* Responsive Design */

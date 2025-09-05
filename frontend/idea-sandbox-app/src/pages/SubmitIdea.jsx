@@ -1,79 +1,97 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 export default function SubmitIdea() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
+  const [ideaTitle, setIdeaTitle] = useState('');
+  const [ideaDescription, setIdeaDescription] = useState('');
+  const [tags, setTags] = useState('');
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    // Demo behaviour: show alert and reset
-    alert("Thanks! Your idea was submitted (demo).\nTitle: " + title);
-    console.log({ title, description, tags });
-    setTitle("");
-    setDescription("");
-    setTags("");
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Idea Submitted:', {
+      title: ideaTitle,
+      description: ideaDescription,
+      tags: tags,
+    });
+    // This is the new line. We are now using React Router to navigate.
+    navigate('/success');
+  };
 
   return (
     <>
       <Header />
-      <section className="idea-form">
-        <div className="container form-layout-container">
-          <div className="form-content">
+      <section className="idea-form section-padding">
+        <div className="container">
+          <div className="glass-card">
             <h2 className="section-title">Submit Your Idea</h2>
-            <p className="form-description">
-              Share a clear title, detailed description, and tags to help others
-              find your idea.
-            </p>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>Idea Title</label>
-                <input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Concise title"
-                  required
-                />
+            <div className="form-layout-container">
+              <div className="form-content">
+                <p className="form-description">
+                  Share a clear title, detailed description, and tags to help others find your idea.
+                </p>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="ideaTitle">Idea Title</label>
+                    <input
+                      type="text"
+                      id="ideaTitle"
+                      placeholder="Concise title"
+                      value={ideaTitle}
+                      onChange={(e) => setIdeaTitle(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="ideaDescription">Description</label>
+                    <textarea
+                      id="ideaDescription"
+                      rows="8"
+                      placeholder="Describe your idea..."
+                      value={ideaDescription}
+                      onChange={(e) => setIdeaDescription(e.target.value)}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="tags">Tags (comma separated)</label>
+                    <input
+                      type="text"
+                      id="tags"
+                      placeholder="e.g., productivity, hr, automation"
+                      value={tags}
+                      onChange={(e) => setTags(e.target.value)}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary form-submit-btn">
+                    Submit Idea
+                  </button>
+                </form>
               </div>
-              <div className="form-group">
-                <label>Description</label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  rows={6}
-                  placeholder="Describe your idea..."
-                  required
-                ></textarea>
+              <div className="form-tips">
+                <h3>Tips for a great idea</h3>
+                <ul>
+                  <li>
+                    <strong>Be specific:</strong> Clearly explain the problem you're solving.
+                  </li>
+                  <li>
+                    <strong>Think impact:</strong> How will this benefit the company or employees?
+                  </li>
+                  <li>
+                    <strong>Consider feasibility:</strong> Is your idea realistic and actionable?
+                  </li>
+                  <li>
+                    <strong>Add details:</strong> The more context you provide, the better others can understand and build upon your idea.
+                  </li>
+                  <li>
+                    <strong>Be open:</strong> Welcome feedback and collaboration from your colleagues.
+                  </li>
+                </ul>
               </div>
-              <div className="form-group">
-                <label>Tags (comma separated)</label>
-                <input
-                  value={tags}
-                  onChange={(e) => setTags(e.target.value)}
-                  placeholder="eg. productivity, hr, automation"
-                />
-              </div>
-              <button type="submit" className="btn btn-primary form-submit-btn">
-                Submit Idea
-              </button>
-            </form>
+            </div>
           </div>
-
-          <aside className="form-tips">
-            <h3>Tips for a good idea</h3>
-            <ul>
-              <li>Keep the title short and clear.</li>
-              <li>Explain the problem and the proposed solution.</li>
-              <li>Mention impact and effort estimates if possible.</li>
-            </ul>
-            <p style={{ marginTop: 20 }}>
-              Or go <Link to="/">back to home</Link>.
-            </p>
-          </aside>
         </div>
       </section>
       <Footer />
