@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../main';
 
 export default function SubmitIdea() {
   const [ideaTitle, setIdeaTitle] = useState('');
@@ -9,14 +11,26 @@ export default function SubmitIdea() {
   const [tags, setTags] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  // Temporary user ID for now, will be updated with actual authentication later
+  const userId = 'user_123';
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Idea Submitted:', {
-      title: ideaTitle,
-      description: ideaDescription,
-      tags: tags,
-    });
-    // This is the new line. We are now using React Router to navigate.
+    try {
+      // Temporarily commenting out the database call to verify navigation works
+      /* await addDoc(collection(db, 'ideas'), {
+        title: ideaTitle,
+        description: ideaDescription,
+        tags: tags.split(',').map(tag => tag.trim()),
+        userId: userId,
+        timestamp: new Date()
+      }); */
+      console.log('Idea submitted! (Database call temporarily disabled)');
+    } catch (e) {
+      console.error('Error adding document: ', e);
+    }
+    
+    // This line will now execute immediately and successfully
     navigate('/success');
   };
 

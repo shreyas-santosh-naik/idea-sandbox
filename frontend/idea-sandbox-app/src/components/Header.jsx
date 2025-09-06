@@ -13,6 +13,9 @@ export default function Header() {
         <nav className="nav">
           <ul className="nav-list">
             <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
               <a href="#features">Features</a>
             </li>
             <li>
@@ -20,6 +23,9 @@ export default function Header() {
             </li>
             <li>
               <a href="#testimonials">Testimonials</a>
+            </li>
+            <li>
+              <Link to="/history">Idea History</Link>
             </li>
             <li>
               <Link to="/submit" className="nav-cta">
