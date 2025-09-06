@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { collection, query, where, onSnapshot, orderBy } from 'firebase/firestore';
-import { db } from '../main';
 
 export default function IdeaHistory() {
   const [ideas, setIdeas] = useState([]);
@@ -12,21 +10,20 @@ export default function IdeaHistory() {
   const userId = 'user_123';
 
   useEffect(() => {
-    const q = query(
-      collection(db, 'ideas'),
-      where('userId', '==', userId),
-      orderBy('timestamp', 'desc')
-    );
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const ideasArray = [];
-      snapshot.forEach((doc) => {
-        ideasArray.push({ id: doc.id, ...doc.data() });
-      });
-      setIdeas(ideasArray);
+    const fetchIdeas = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/ideas?userId=' + userId);
+        const data = await response.json();
+        // Sort by timestamp descending
+        data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        setIdeas(data);
+     
+      } catch (error) {
+        console.error('Error fetching ideas:', error);
+      }
       setLoading(false);
-    });
-
-    return () => unsubscribe(); // Cleanup function to unsubscribe from the listener
+    };
+    fetchIdeas();
   }, []);
 
   if (loading) {
@@ -63,7 +60,7 @@ export default function IdeaHistory() {
                     ))}
                   </div>
                   <p className="idea-timestamp">
-                    Submitted on: {new Date(idea.timestamp.seconds * 1000).toLocaleDateString()}
+                    Submitted on: {new Date(idea.timestamp).toLocaleDateString()}
                   </p>
                 </div>
               ))
