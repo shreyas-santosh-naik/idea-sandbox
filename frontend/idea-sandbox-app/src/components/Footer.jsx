@@ -13,6 +13,7 @@ export default function Footer() {
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#testimonials">Benefits</a>
+            <Link to="/history">Idea History</Link>
             <Link to="/submit" className="nav-cta">
               Submit Idea
             </Link>
