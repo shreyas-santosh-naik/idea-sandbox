@@ -1,0 +1,6 @@
+{
+  "routes": {
+    "/ideas": "/ideas",
+    "/ideas/:id": "/ideas/:id"
+  }
+}

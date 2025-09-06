@@ -10,10 +10,26 @@ export default function Success() {
     navigate('/');
   };
 
-  const handleSubmitAnotherIdea = () => {
-    navigate('/submit');
+const handleSubmitAnotherIdea = async () => {
+  // Example idea data to save
+  const newIdea = {
+    title: "New Idea Title",
+    description: "Description of the new idea",
+    createdAt: new Date().toISOString()
   };
 
+  try {
+    await fetch('http://localhost:5000/ideas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newIdea)
+    });
+    navigate('/submit');
+  } catch (error) {
+    console.error('Failed to save idea:', error);
+    navigate('/submit');
+  }
+};
   return (
     <>
       <Header />
