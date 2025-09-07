@@ -7,7 +7,7 @@ export default function Header() {
       <div className="container">
         <div className="logo">
           <Link to="/">
-            <img src="/idea-sandbox_logo.jpg" alt="Idea Sandbox Logo" />
+            <img src="/idea-sandbox_logo.png" alt="Idea Sandbox Logo" /> 
           </Link>
         </div>
         <nav className="nav">

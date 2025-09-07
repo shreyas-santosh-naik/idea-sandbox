@@ -1,16 +1,6 @@
 {
   "ideas": [
     {
-      "title": "Randomd",
-      "description": "d",
-      "tags": [
-        ""
-      ],
-      "userId": "user_123",
-      "timestamp": "2025-09-06T15:21:33.275Z",
-      "id": 1
-    },
-    {
       "title": "use fastapi for backend",
       "description": "use fastapi for backend",
       "tags": [
@@ -19,6 +9,26 @@
       "userId": "user_123",
       "timestamp": "2025-09-06T15:23:24.434Z",
       "id": 2
+    },
+    {
+      "title": "Remaking the logo of the website",
+      "description": "the logo is good but can be better with more creativity and professionalism",
+      "tags": [
+        "logo"
+      ],
+      "userId": "user_123",
+      "timestamp": "2025-09-07T16:46:55.594Z",
+      "id": 3
+    },
+    {
+      "title": "Implement light mode",
+      "description": "Add a light mode option to the website for better user experience.",
+      "tags": [
+        "light mode"
+      ],
+      "userId": "user_123",
+      "timestamp": "2025-09-07T18:16:03.272Z",
+      "id": 4
     }
   ]
 }

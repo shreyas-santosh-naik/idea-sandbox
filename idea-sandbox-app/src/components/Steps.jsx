@@ -8,16 +8,17 @@ export default function Steps() {
         <div className="steps-grid">
           <div className="step-card animate-fade-in-left">
             <span className="step-number">1</span>
-            <h3>Fosters Collective Intelligence</h3>
+            <h3>Collaborative Idea Management</h3>
+            <br></br>
             <p>
-              The platform taps into the creativity of the entire workforce, not
-              just a select few in R&D or management.
+              Empower your team to collectively brainstorm, submit, and refine ideas in one centralized platform.
             </p>
           </div>
 
           <div className="step-card animate-fade-in-left delay-200">
             <span className="step-number">2</span>
             <h3>Boosts Employee Engagement</h3>
+            <br></br>
             <p>
               It empowers employees by giving them a voice and a stake in the
               company's direction, fostering a culture of trust and shared
@@ -28,12 +29,14 @@ export default function Steps() {
           <div className="step-card animate-fade-in-left delay-400">
             <span className="step-number">3</span>
             <h3>Transparent Path to Action</h3>
+            <br></br>
             <p>
               It's a dynamic, interactive workshop where ideas are collectively
               sculpted, with a clear path to implementation that turns a simple
               suggestion into a valued asset.
             </p>
           </div>
+          
         </div>
       </div>
     </section>
