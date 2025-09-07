@@ -43,13 +43,12 @@ idea-sandbox-app
 
 * [Node.js](https://nodejs.org/) and npm installed
 
-
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/shreyas-santosh-naik/idea-sandbox.git
    cd idea-sandbox-app
    ```
 
@@ -61,26 +60,32 @@ idea-sandbox-app
 
 ### Running the Application
 
-Start the Vite development server:
+You can start both the Vite development server and the mock API together with:
 
 ```bash
-npm run dev
+npm start
 ```
 
-By default, the app will be available at:
-`http://localhost:5173` (Vite default, may vary if configured)
+- The React app will be available at:  
+  `http://localhost:3000` 
+- The mock API will run at:  
+  `http://localhost:5000`
 
-### Running the Mock API
+#### Alternatively
 
-Run the JSON server for mock data:
+You can run them separately:
 
-```bash
-npm run mock
-```
+- Start the Vite development server:
 
-The mock API will run at:
-`http://localhost:5000`
+  ```bash
+  npm run dev
+  ```
 
+- Start the mock API server:
+
+  ```bash
+  npm run mock
+  ```
 
 ## Contributing
 
