@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function IdeaHistory() {
   const [ideas, setIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Temporary user ID, will be updated with actual authentication later
-  const userId = 'user_123';
+  const userId = "user_123";
 
   useEffect(() => {
     const fetchIdeas = async () => {
       try {
-        const response = await fetch('http://localhost:5000/ideas?userId=' + userId);
+        const response = await fetch(
+          "http://localhost:5000/ideas?userId=" + userId
+        );
         const data = await response.json();
         // Sort by timestamp descending
         data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         setIdeas(data);
-     
       } catch (error) {
-        console.error('Error fetching ideas:', error);
+        console.error("Error fetching ideas:", error);
       }
       setLoading(false);
     };
@@ -46,21 +47,37 @@ export default function IdeaHistory() {
       <section className="section-padding">
         <div className="container">
           <h2 className="section-title">My Past Submissions</h2>
+
+          {/* {ideas.length > 0 && (
+            <pre style={{ color: "#fff", background: "#222", padding: 10 }}>
+              {JSON.stringify(ideas, null, 2)}
+            </pre>
+          )} */}
+
           <div className="idea-history-grid">
             {ideas.length === 0 ? (
-              <p className="text-center" style={{ color: 'var(--text-muted)' }}>You haven't submitted any ideas yet.</p>
+              <p className="text-center" style={{ color: "var(--text-muted)" }}>
+                You haven't submitted any ideas yet.
+              </p>
             ) : (
               ideas.map((idea) => (
-                <div key={idea.id} className="idea-card glass-card animate-scale-in">
+                <div key={idea.id} className="idea-card glass-card">
                   <h3>{idea.title}</h3>
                   <p>{idea.description}</p>
                   <div className="idea-tags">
-                    {idea.tags.map((tag, index) => (
-                      <span key={index} className="tag">{tag}</span>
-                    ))}
+                    {(Array.isArray(idea.tags) ? idea.tags : []).map(
+                      (tag, index) => (
+                        <span key={index} className="tag">
+                          {tag}
+                        </span>
+                      )
+                    )}
                   </div>
                   <p className="idea-timestamp">
-                    Submitted on: {new Date(idea.timestamp).toLocaleDateString()}
+                    Submitted on:{" "}
+                    {idea.timestamp
+                      ? new Date(idea.timestamp).toLocaleDateString()
+                      : "N/A"}
                   </p>
                 </div>
               ))
