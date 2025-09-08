@@ -515,6 +515,12 @@ p {
   justify-content: center;
 }
 
+.idea-history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; /* Add this line to create space between the cards */
+}
+
 .idea-form .section-title {
   margin-bottom: 20px;
   color: var(--text-light);
