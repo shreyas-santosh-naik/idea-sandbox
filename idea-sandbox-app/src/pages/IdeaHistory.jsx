@@ -27,6 +27,19 @@ export default function IdeaHistory() {
     fetchIdeas();
   }, []);
 
+  const handleDelete = async (ideaId) => {
+    try {
+      await fetch(`http://localhost:5000/ideas/${ideaId}`, {
+        method: "DELETE",
+      });
+      // Remove the deleted idea from the state
+      setIdeas(ideas.filter((idea) => idea.id !== ideaId));
+      console.log(`Idea with ID: ${ideaId} deleted.`);
+    } catch (error) {
+      console.error("Error deleting idea:", error);
+    }
+  };
+
   if (loading) {
     return (
       <>
@@ -47,12 +60,6 @@ export default function IdeaHistory() {
       <section className="section-padding">
         <div className="container">
           <h2 className="section-title">My Past Submissions</h2>
-
-          {/* {ideas.length > 0 && (
-            <pre style={{ color: "#fff", background: "#222", padding: 10 }}>
-              {JSON.stringify(ideas, null, 2)}
-            </pre>
-          )} */}
 
           <div className="idea-history-grid">
             {ideas.length === 0 ? (
@@ -79,6 +86,12 @@ export default function IdeaHistory() {
                       ? new Date(idea.timestamp).toLocaleDateString()
                       : "N/A"}
                   </p>
+                  <button
+                    onClick={() => handleDelete(idea.id)}
+                    className="btn btn-delete"
+                  >
+                    Delete
+                  </button>
                 </div>
               ))
             )}
