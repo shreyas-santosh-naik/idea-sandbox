@@ -180,6 +180,14 @@ p {
 }
 
 /* Header */
+body {
+  /* ... existing styles ... */
+  padding-top: 45px; /* Add this line to create space for the fixed header */
+}
+.section-padding {
+  padding-top: 140px; /* Adjust this value to add more space above the headings */
+  padding-bottom: 80px;
+}
 .header {
   background-color: #50e3c2;
   backdrop-filter: blur(8px);

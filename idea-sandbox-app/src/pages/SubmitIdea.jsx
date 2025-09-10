@@ -1,40 +1,40 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../main";
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../main';
 
 export default function SubmitIdea() {
-  const [ideaTitle, setIdeaTitle] = useState("");
-  const [ideaDescription, setIdeaDescription] = useState("");
-  const [tags, setTags] = useState("");
+  const [ideaTitle, setIdeaTitle] = useState('');
+  const [ideaDescription, setIdeaDescription] = useState('');
+  const [tags, setTags] = useState('');
   const navigate = useNavigate();
 
   // Temporary user ID for now, will be updated with actual authentication later
-  const userId = "user_123";
+  const userId = 'user_123';
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      // Save to mock API (JSON Server)
-      await fetch("http://localhost:5000/ideas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: ideaTitle,
-          description: ideaDescription,
-          tags: tags.split(",").map((tag) => tag.trim()),
-          userId: userId,
-          timestamp: new Date().toISOString(),
-        }),
-      });
-      console.log("Idea submitted to mock API!");
-    } catch (e) {
-      console.error("Error adding idea to mock API: ", e);
-    }
-    navigate("/success");
-  };
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    // Save to mock API (JSON Server)
+    await fetch('http://localhost:5000/ideas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: ideaTitle,
+        description: ideaDescription,
+        tags: tags.split(',').map(tag => tag.trim()),
+        userId: userId,
+        timestamp: new Date().toISOString()
+      })
+    });
+    console.log('Idea submitted to mock API!');
+  } catch (e) {
+    console.error('Error adding idea to mock API: ', e);
+  }
+  navigate('/success');
+};
 
   return (
     <>
@@ -46,8 +46,7 @@ export default function SubmitIdea() {
             <div className="form-layout-container">
               <div className="form-content">
                 <p className="form-description">
-                  Share a clear title, detailed description, and tags to help
-                  others find your idea.
+                  Share a clear title, detailed description, and tags to help others find your idea.
                 </p>
                 <form onSubmit={handleSubmit}>
                   <div className="form-group">
@@ -82,10 +81,7 @@ export default function SubmitIdea() {
                       onChange={(e) => setTags(e.target.value)}
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary form-submit-btn"
-                  >
+                  <button type="submit" className="btn btn-primary form-submit-btn">
                     Submit Idea
                   </button>
                 </form>
@@ -94,24 +90,19 @@ export default function SubmitIdea() {
                 <h3>Tips for a great idea</h3>
                 <ul>
                   <li>
-                    <strong>Be specific:</strong> Clearly explain the problem
-                    you're solving.
+                    <strong>Be specific:</strong> Clearly explain the problem you're solving.
                   </li>
                   <li>
-                    <strong>Think impact:</strong> How will this benefit the
-                    company or employees?
+                    <strong>Think impact:</strong> How will this benefit the company or employees?
                   </li>
                   <li>
-                    <strong>Consider feasibility:</strong> Is your idea
-                    realistic and actionable?
+                    <strong>Consider feasibility:</strong> Is your idea realistic and actionable?
                   </li>
                   <li>
-                    <strong>Add details:</strong> The more context you provide,
-                    the better others can understand and build upon your idea.
+                    <strong>Add details:</strong> The more context you provide, the better others can understand and build upon your idea.
                   </li>
                   <li>
-                    <strong>Be open:</strong> Welcome feedback and collaboration
-                    from your colleagues.
+                    <strong>Be open:</strong> Welcome feedback and collaboration from your colleagues.
                   </li>
                 </ul>
               </div>

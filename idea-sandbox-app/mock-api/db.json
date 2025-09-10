@@ -29,6 +29,26 @@
       "userId": "user_123",
       "timestamp": "2025-09-07T18:16:03.272Z",
       "id": 4
+    },
+    {
+      "title": "Integrate Auth0",
+      "description": "integrate auth0 to the website for a login page",
+      "tags": [
+        ""
+      ],
+      "userId": "user_123",
+      "timestamp": "2025-09-08T17:05:12.821Z",
+      "id": 5
+    },
+    {
+      "title": "Background",
+      "description": "add a animated or a moving background to the website to make it look way cooler than it is currently.",
+      "tags": [
+        "User Interface"
+      ],
+      "userId": "user_123",
+      "timestamp": "2025-09-09T12:06:01.472Z",
+      "id": 6
     }
   ]
 }
