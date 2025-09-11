@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero-background-gradient"></div>
-      <div className="background-particles"></div>
+      {/* <div className="background-particles"></div> */}
       <div className="container hero-container">
         <div className="glass-card animate-scale-in">
           {/* New H1 tag for the welcome message */}

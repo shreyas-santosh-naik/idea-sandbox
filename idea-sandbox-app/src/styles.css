@@ -13,7 +13,6 @@
  * Font Families: Poppins (headings), Roboto (body)
  */
 
- 
 /* General Styles */
 :root {
   --primary-color: #50e3c2;
@@ -151,16 +150,17 @@ p {
   }
 }
 
-@keyframes particle-animation {
+/* FIX: New keyframes for particle animation */
+@keyframes float {
   0% {
     transform: translateY(0);
-    opacity: 0;
+    opacity: 0.5;
   }
   50% {
     opacity: 1;
   }
   100% {
-    transform: translateY(-100vh);
+    transform: translateY(-1500px);
     opacity: 0;
   }
 }
@@ -188,8 +188,9 @@ body {
   padding-top: 140px; /* Adjust this value to add more space above the headings */
   padding-bottom: 80px;
 }
+/* Header */
 .header {
-  background-color: #50e3c2;
+  background-color: rgba(80, 227, 194, 1.0); /* Changed to rgba for transparency */
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px 0;
@@ -206,7 +207,6 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
-
 .header .container {
   display: flex;
   justify-content: space-between;
@@ -276,23 +276,25 @@ body {
   z-index: 0;
 }
 
+/* FIX: Corrected position and z-index for background particles */
 .background-particles {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
   overflow: hidden;
+  z-index: -1;
 }
 
+/* FIX: Corrected animation property for particles */
 .particle {
   position: absolute;
   width: 2px;
   height: 2px;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  animation: particle-animation linear infinite;
+  animation: float linear infinite;
 }
 
 .hero-container {
@@ -673,4 +675,43 @@ body {
   background-color: #c40027;
 }
 
+/* ==================================== */
+/* === Background Particles CSS === */
+/* ==================================== */
 
+.main-content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.background-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.particle {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1500px);
+    opacity: 0;
+  }
+}
