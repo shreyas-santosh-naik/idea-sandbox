@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 import './styles.css';
+import { AuthProvider } from './context/AuthContext.jsx'; // 1. Import AuthProvider
+
 
 // 1. Firebase Imports
 import { initializeApp } from 'firebase/app';
@@ -23,10 +25,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      {/* 2. Wrap the App component with AuthProvider */}
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

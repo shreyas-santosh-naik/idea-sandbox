@@ -44,12 +44,9 @@ body {
   color: var(--text-light);
   background-color: var(--bg-dark-primary);
   overflow-x: hidden;
-  /* Styles for centering */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Solution for fixed header covering content */
-  padding-top: 90px;
+
+  /* This padding creates the correct space for your fixed header */
+  padding-top: 80px; 
 }
 
 .container {
@@ -354,7 +351,6 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease;
-  opacity: 0;
 }
 
 .feature-card:hover {
@@ -714,4 +710,33 @@ body {
     transform: translateY(-1500px);
     opacity: 0;
   }
+}
+
+/* --- Auth Form Page Styles --- */
+.auth-form-page {
+  background-color: var(--bg-dark-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.nav-cta-logout {
+  background: none;
+  border: none;
+  color: var(--bg-dark-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-cta-logout:hover {
+  color: var(--secondary-color);
 }

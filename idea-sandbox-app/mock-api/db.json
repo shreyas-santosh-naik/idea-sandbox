@@ -55,6 +55,16 @@
       "description": "Description of the new idea",
       "createdAt": "2025-09-11T14:17:31.171Z",
       "id": 8
+    },
+    {
+      "title": "Remaking the logo of the website",
+      "description": "better logo would be better",
+      "tags": [
+        "productivity"
+      ],
+      "userId": "user_123",
+      "timestamp": "2025-09-12T11:28:26.903Z",
+      "id": 9
     }
   ]
 }
