@@ -10,7 +10,9 @@ export default function Header() {
       <div className="container">
         <div className="logo">
           <Link to="/">
-            <img src="/idea-sandbox_logo.png" alt="Idea Sandbox Logo" />
+            <div className="logo-container">
+              <img src="/idea-sandbox_logo.png" alt="Idea Sandbox Logo" />
+            </div>
           </Link>
         </div>
         <nav className="nav">
@@ -28,10 +30,10 @@ export default function Header() {
               </>
             ) : (
               // If user is logged out
-              <>
-                <li><Link to="/login">Log In</Link></li>
-                <li><Link to="/signup" className="nav-cta">Sign Up</Link></li>
-              </>
+                <>
+                  <li><Link to="/login" className="nav-auth-btn">Log In</Link></li>
+                  <li><Link to="/signup" className="nav-auth-btn">Sign Up</Link></li>
+                </>
             )}
           </ul>
         </nav>
