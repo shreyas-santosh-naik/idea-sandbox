@@ -249,7 +249,6 @@ body {
 
 /* Hero Section */
 .hero {
-  background: var(--bg-dark-primary);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -265,12 +264,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  /* Change the background to transparent or a very subtle gradient */
   background: radial-gradient(
     circle at 10% 20%,
-    var(--bg-dark-secondary) 0%,
-    var(--bg-dark-primary) 100%
+    rgba(28, 36, 49, 0) 0%, /* Transparent version of bg-dark-secondary */
+    rgba(15, 22, 38, 0.4) 100% /* Slightly opaque version of bg-dark-primary */
   );
-  z-index: 0;
+  z-index: 1; /* Make it above particles (-1) but below header (1000) */
 }
 
 /* FIX: Corrected position and z-index for background particles */
@@ -330,7 +330,6 @@ body {
 
 /* Features Section */
 .features {
-  background-color: var(--bg-dark-secondary);
 }
 
 .features .section-title {
@@ -374,9 +373,34 @@ body {
   font-size: 1rem;
 }
 
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+/* Add a hover effect to animate the icon when the card is hovered */
+.feature-card:hover .feature-icon svg {
+  transform: scale(1.1) rotate(-5deg);
+}
+
 /* How It Works Section */
 .how-it-works {
-  background-color: var(--bg-dark-primary);
   color: var(--text-light);
 }
 
@@ -404,16 +428,19 @@ body {
   height: 50px;
   line-height: 50px;
   border-radius: 50%;
-  background-color: var(--secondary-color);
-  color: var(--text-light);
+  /* New glass-themed styles */
+  background: var(--glass-bg); /* Use the transparent background variable */
+  backdrop-filter: blur(5px); /* Add a subtle blur for frosted effect */
+  border: 1px solid var(--glass-border); /* Add a light border */
+  color: var(--primary-color); /* Change text color to the primary teal */
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
 /* Testimonials Section */
 .testimonials {
-  background-color: var(--bg-dark-secondary);
 }
 
 .testimonials .section-title {
@@ -514,7 +541,6 @@ body {
 
 /* --- Styles for the Idea Submission Page --- */
 .idea-form {
-  background-color: var(--bg-dark-primary);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -628,7 +654,6 @@ body {
 
 /* --- Success Page Styles --- */
 .success-page {
-  background-color: var(--bg-dark-primary);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -691,7 +716,7 @@ body {
 }
 
 .particle {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgb(255, 255, 255);
   border-radius: 50%;
   position: absolute;
   bottom: 0;
@@ -714,7 +739,6 @@ body {
 
 /* --- Auth Form Page Styles --- */
 .auth-form-page {
-  background-color: var(--bg-dark-primary);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -722,8 +746,12 @@ body {
 }
 
 .auth-form-container {
-  max-width: 400px;
   margin: 0 auto;
+}
+
+.auth-form-page .glass-card {
+  width: 100%;
+  max-width: 550px;
 }
 
 .nav-cta-logout {
