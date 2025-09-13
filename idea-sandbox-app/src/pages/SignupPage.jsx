@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // The missing import for <Link> is now included
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,13 +8,19 @@ export default function SignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const [error, setError] = useState('');
+  const { signup } = useAuth();
   const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email);
-    navigate('/');
+    setError('');
+    const result = signup(name, email, password);
+    if (result.success) {
+      navigate('/');
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
@@ -25,6 +31,7 @@ export default function SignupPage() {
           <div className="glass-card">
             <h2 className="section-title">Sign Up</h2>
             <form onSubmit={handleSubmit} className="auth-form-container">
+              {error && <p style={{ color: '#e0002f', textAlign: 'center' }}>{error}</p>}
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input 

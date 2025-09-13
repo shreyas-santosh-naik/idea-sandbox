@@ -224,6 +224,7 @@ body {
   display: flex;
   list-style: none;
   gap: 30px;
+  align-items: center; 
 }
 
 .nav-list a {
@@ -514,10 +515,27 @@ body {
 }
 
 /* CTA Section */
+/* CTA Section */
 .cta {
-  background-color: var(--primary-color);
+  background: linear-gradient(120deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+  background-size: 400% 400%;
+  animation: plasmaFlow 15s ease infinite; /* Added the animation */
   color: var(--bg-dark-primary);
-  text-align: center;
+}
+
+/* Add these new rules */
+.cta .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers everything horizontally */
+}
+
+.cta .cta-title {
+  margin-bottom: 40px; /* Reduces space below the main title */
+}
+
+.cta .cta-description {
+  margin-bottom: 40px; /* Adds space above the button */
 }
 
 .cta h2 {
@@ -527,6 +545,56 @@ body {
 .cta p {
   margin-bottom: 30px;
   color: var(--bg-dark-primary);
+}
+
+/* Pseudo-element for the color-shifting, ethereal glow */
+.cta-icon::before {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(80, 227, 194, 0.2) 0%, /* Start with primary color */
+    rgba(149, 137, 243, 0.2) 25%, /* Shift to secondary/purple */
+    rgba(80, 227, 194, 0.2) 50%,
+    rgba(149, 137, 243, 0.2) 75%,
+    rgba(80, 227, 194, 0.2) 100%
+  );
+  border-radius: 50%;
+  filter: blur(30px); /* Soften the glow */
+  animation: rotateGlow 8s linear infinite;
+  z-index: 0;
+}
+
+
+/* --- New Animation Keyframes --- */
+@keyframes holographicShimmer {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(80, 227, 194, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px var(--primary-color)) drop-shadow(0 0 35px var(--secondary-color));
+    transform: scale(1.03);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(80, 227, 194, 0.7));
+  }
+}
+
+@keyframes rotateGlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.7;
+  }
 }
 
 /* Footer */
@@ -951,4 +1019,152 @@ body {
 .auth-switch-link a:hover {
   filter: brightness(1.2);
   text-decoration: underline;
+}
+
+/* --- New Profile Page Styles --- */
+.profile-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-dark-secondary);
+  border-radius: 15px;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid var(--glass-border);
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: var(--bg-dark-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0 auto 20px;
+  font-family: var(--font-heading);
+}
+
+.profile-name {
+  font-size: 2rem;
+  color: var(--text-light);
+}
+
+.profile-email {
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.profile-divider {
+  border: none;
+  height: 1px;
+  background-color: var(--glass-border);
+  margin: 30px 0;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+/* --- New Header Dropdown Styles --- */
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-btn {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-btn .arrow {
+  border: solid var(--text-light);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.profile-btn .arrow.up {
+  transform: rotate(-135deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 150%;
+  right: 0;
+  background: var(--bg-dark-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  list-style: none;
+  padding: 10px;
+  width: 180px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  z-index: 1100;
+}
+
+.dropdown-menu li {
+  margin: 5px 0;
+}
+
+.dropdown-menu a, .dropdown-menu button {
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--glass-bg);
+}
+
+.dropdown-menu hr {
+  border: none;
+  height: 1px;
+  background-color: var(--glass-border);
+  margin: 5px 0;
+}
+
+.dropdown-logout {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dropdown-logout:hover {
+  background-color: rgba(224, 0, 47, 0.2);
+  color: #ff5252;
 }

@@ -1,21 +1,29 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom'; // 1. Import useLocation
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function Header() {
   const { user, logout } = useAuth();
-  const location = useLocation(); // 2. Get the current page location
+  const location = useLocation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // 3. Create the click handler function
   const handleHomeClick = () => {
-    // If we are already on the homepage, scroll to the top
     if (location.pathname === '/') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth', // This creates the smooth scrolling effect
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  // Effect to close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownRef]);
 
   return (
     <header className="header">
@@ -29,24 +37,31 @@ export default function Header() {
         </div>
         <nav className="nav">
           <ul className="nav-list">
-            {/* 4. Add the onClick handler to the Home link */}
-            <li>
-              <Link to="/" onClick={handleHomeClick}>
-                Home
-              </Link>
-            </li>
+            <li><Link to="/" onClick={handleHomeClick}>Home</Link></li>
             <li><a href="/#features">Features</a></li>
             <li><a href="/#how-it-works">How It Works</a></li>
 
             {user ? (
-              // If user is logged in
+              // --- Dropdown for Logged-in Users ---
               <>
-                <li><Link to="/history">My Ideas</Link></li>
-                <li><button onClick={logout} className="nav-cta-logout">Log Out</button></li>
+                <li className="profile-dropdown" ref={dropdownRef}>
+                  <button onClick={() => setDropdownOpen(!dropdownOpen)} className="profile-btn">
+                    {user.name}
+                    <span className={`arrow ${dropdownOpen ? 'up' : 'down'}`}></span>
+                  </button>
+                  {dropdownOpen && (
+                    <ul className="dropdown-menu">
+                      <li><Link to="/profile" onClick={() => setDropdownOpen(false)}>My Profile</Link></li>
+                      <li><Link to="/history" onClick={() => setDropdownOpen(false)}>My Ideas</Link></li>
+                      <li><hr/></li>
+                      <li><button onClick={logout} className="dropdown-logout">Log Out</button></li>
+                    </ul>
+                  )}
+                </li>
                 <li><Link to="/submit" className="nav-cta">Submit Idea</Link></li>
               </>
             ) : (
-              // If user is logged out
+              // --- Links for Logged-out Users ---
               <>
                 <li><Link to="/login" className="nav-auth-btn">Log In</Link></li>
                 <li><Link to="/signup" className="nav-auth-btn">Sign Up</Link></li>

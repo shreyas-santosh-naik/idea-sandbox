@@ -6,13 +6,14 @@ import Success from './pages/Success';
 import IdeaHistory from './pages/IdeaHistory';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ProfilePage from './pages/ProfilePage'; // Make sure this is imported
 import ProtectedRoute from './auth/ProtectedRoute';
 import BackgroundParticles from './components/BackgroundParticles.jsx';
 
 export default function App() {
   return (
     <>
-      <BackgroundParticles count={600} />
+      <BackgroundParticles />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -21,14 +22,9 @@ export default function App() {
         <Route path="/success" element={<Success />} />
 
         {/* Protected Routes */}
-        <Route 
-          path="/submit" 
-          element={<ProtectedRoute><SubmitIdea /></ProtectedRoute>} 
-        />
-        <Route 
-          path="/history" 
-          element={<ProtectedRoute><IdeaHistory /></ProtectedRoute>} 
-        />
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/submit" element={<ProtectedRoute><SubmitIdea /></ProtectedRoute>} />
+        <Route path="/history" element={<ProtectedRoute><IdeaHistory /></ProtectedRoute>} />
       </Routes>
     </>
   );

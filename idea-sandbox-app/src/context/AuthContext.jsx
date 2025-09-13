@@ -1,55 +1,70 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-// Create the context
 const AuthContext = createContext(null);
 
-// Create the provider component
+// Helper function to get the mock user database from localStorage
+const getUserDatabase = () => {
+  const users = localStorage.getItem('idea-sandbox-users');
+  return users ? JSON.parse(users) : [];
+};
+
 export function AuthProvider({ children }) {
-  // 1. Initialize state from localStorage, or null if nothing is there
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('idea-sandbox-user');
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // This effect will run whenever the user state changes
-  useEffect(() => {
-    if (user) {
-      // 2. If user exists, save it to localStorage
-      localStorage.setItem('idea-sandbox-user', JSON.stringify(user));
-    } else {
-      // 3. If user is null (logged out), remove it from localStorage
-      localStorage.removeItem('idea-sandbox-user');
-    }
-  }, [user]); // The effect depends on the user object
+  const signup = (name, email, password) => {
+    const users = getUserDatabase();
+    const userExists = users.find(u => u.email === email);
 
-  const login = (email) => {
-    let mockUser = {
-      id: 'user_123',
-      name: 'Shreyas',
-      email: email,
-      role: 'user',
-    };
+    if (userExists) {
+      return { success: false, message: 'A user with this email already exists.' };
+    }
+
+    const uniqueId = 'user_' + email.split('@')[0].replace(/\./g, '_');
+    const newUser = { id: uniqueId, name, email, password, role: 'user' };
+
+    users.push(newUser);
+    localStorage.setItem('idea-sandbox-users', JSON.stringify(users));
     
-    if (email.toLowerCase() === 'admin@example.com') {
-      mockUser.role = 'admin';
-      mockUser.name = 'Admin User';
+    // Automatically log the new user in
+    localStorage.setItem('idea-sandbox-user', JSON.stringify(newUser));
+    setUser(newUser);
+    console.log("AuthContext: Signed up and logged in user:", newUser);
+    return { success: true };
+  };
+
+  const login = (email, password) => {
+    const users = getUserDatabase();
+    const foundUser = users.find(u => u.email === email);
+
+    if (!foundUser) {
+      return { success: false, message: 'Invalid email or password.' };
     }
 
-    // Setting the user state will trigger the useEffect above to save it
-    setUser(mockUser);
+    if (foundUser.password !== password) {
+      return { success: false, message: 'Invalid email or password.' };
+    }
+
+    // Passwords match, log the user in
+    localStorage.setItem('idea-sandbox-user', JSON.stringify(foundUser));
+    setUser(foundUser);
+    console.log("AuthContext: Logged in user:", foundUser);
+    return { success: true };
   };
 
   const logout = () => {
-    // Setting the user to null will trigger the useEffect to remove it
+    console.log("AuthContext: Logging out user.");
+    localStorage.removeItem('idea-sandbox-user');
     setUser(null);
   };
 
-  const value = { user, login, logout };
+  const value = { user, login, logout, signup };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-// Custom hook for easy access to the context
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

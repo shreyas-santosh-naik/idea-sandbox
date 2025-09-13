@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // The missing import for <Link> is now included
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,13 +7,19 @@ import Footer from '../components/Footer';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // State for error messages
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email);
-    navigate('/');
+    setError(''); // Clear previous errors
+    const result = login(email, password); // Pass password to login function
+    if (result.success) {
+      navigate('/');
+    } else {
+      setError(result.message); // Set the error message if login fails
+    }
   };
 
   return (
@@ -24,6 +30,8 @@ export default function LoginPage() {
           <div className="glass-card">
             <h2 className="section-title">Log In</h2>
             <form onSubmit={handleSubmit} className="auth-form-container">
+              {/* Display error message if it exists */}
+              {error && <p style={{ color: '#e0002f', textAlign: 'center' }}>{error}</p>}
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
