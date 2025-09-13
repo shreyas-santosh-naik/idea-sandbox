@@ -4,7 +4,7 @@ export default function BackgroundParticles({ count = 50 }) {
   const particles = Array.from({ length: count }).map(() => {
     const size = Math.random() * 4 + 1;
     const left = Math.random() * 100;
-    const duration = Math.random() * 10 + 10;
+    const duration = Math.random() * 20 + 10;
     const delay = Math.random() * 5;
     return {
       width: `${size}px`,

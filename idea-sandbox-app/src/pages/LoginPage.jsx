@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // The missing import for <Link> is now included
 import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -12,9 +12,7 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Use the mock login function from the context
     login(email);
-    // Redirect to the home page after login
     navigate('/');
   };
 
@@ -51,6 +49,9 @@ export default function LoginPage() {
               <button type="submit" className="btn btn-primary form-submit-btn">
                 Log In
               </button>
+              <div className="auth-switch-link">
+                <p>Haven't created an account? <Link to="/signup">Sign Up</Link></p>
+              </div>
             </form>
           </div>
         </div>

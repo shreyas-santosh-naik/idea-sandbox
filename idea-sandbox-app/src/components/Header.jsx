@@ -1,9 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx'; // Import the useAuth hook
+import { Link, useLocation } from 'react-router-dom'; // 1. Import useLocation
+import { useAuth } from '../context/AuthContext.jsx';
 
 export default function Header() {
-  const { user, logout } = useAuth(); // Get user state and logout function
+  const { user, logout } = useAuth();
+  const location = useLocation(); // 2. Get the current page location
+
+  // 3. Create the click handler function
+  const handleHomeClick = () => {
+    // If we are already on the homepage, scroll to the top
+    if (location.pathname === '/') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // This creates the smooth scrolling effect
+      });
+    }
+  };
 
   return (
     <header className="header">
@@ -17,7 +29,12 @@ export default function Header() {
         </div>
         <nav className="nav">
           <ul className="nav-list">
-            <li><Link to="/">Home</Link></li>
+            {/* 4. Add the onClick handler to the Home link */}
+            <li>
+              <Link to="/" onClick={handleHomeClick}>
+                Home
+              </Link>
+            </li>
             <li><a href="/#features">Features</a></li>
             <li><a href="/#how-it-works">How It Works</a></li>
 
@@ -30,10 +47,10 @@ export default function Header() {
               </>
             ) : (
               // If user is logged out
-                <>
-                  <li><Link to="/login" className="nav-auth-btn">Log In</Link></li>
-                  <li><Link to="/signup" className="nav-auth-btn">Sign Up</Link></li>
-                </>
+              <>
+                <li><Link to="/login" className="nav-auth-btn">Log In</Link></li>
+                <li><Link to="/signup" className="nav-auth-btn">Sign Up</Link></li>
+              </>
             )}
           </ul>
         </nav>

@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
-import { useAuth } from '../context/AuthContext';    // 2. Import useAuth
+import { useNavigate, Link } from 'react-router-dom'; // The missing import for <Link> is now included
+import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function SignupPage() {
-  // 3. Add state for form inputs
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // 4. Get the login function and navigate hook
   const { login } = useAuth();
   const navigate = useNavigate();
   
-  // 5. Create the submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    // For our mock setup, we'll just "log in" the new user immediately
     login(email);
-    // And then redirect them to the dashboard
     navigate('/');
   };
 
@@ -30,7 +24,6 @@ export default function SignupPage() {
         <div className="container">
           <div className="glass-card">
             <h2 className="section-title">Sign Up</h2>
-            {/* 6. Attach the submit handler to the form */}
             <form onSubmit={handleSubmit} className="auth-form-container">
               <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -68,6 +61,9 @@ export default function SignupPage() {
               <button type="submit" className="btn btn-primary form-submit-btn">
                 Create Account
               </button>
+              <div className="auth-switch-link">
+                <p>Already have an account? <Link to="/login">Log In</Link></p>
+              </div>
             </form>
           </div>
         </div>

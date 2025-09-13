@@ -642,18 +642,18 @@ body {
 
 .form-content {
   flex: 2;
-  background-color: var(--bg-dark-secondary);
+  background-color: #121A2A; /* A darker shade, almost like the main background */
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* box-shadow removed */
 }
 
 .form-tips {
   flex: 1;
-  background-color: var(--bg-dark-secondary);
+  background-color: #121A2A; /* Consistent darker shade */
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* box-shadow removed */
   border-left: 5px solid var(--primary-color);
 }
 
@@ -780,6 +780,8 @@ body {
 
 .particle {
   background-color: rgb(255, 255, 255);
+  /* background-color: var(--primary-color); Now uses your theme's teal color */
+  opacity: 0.6; /* You can adjust the transparency here */
   border-radius: 50%;
   position: absolute;
   bottom: 0;
@@ -926,4 +928,27 @@ body {
   100% {
     background-position: 0% center;
   }
+}
+
+/* --- Style for the Login/Signup switch link --- */
+.auth-switch-link {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.auth-switch-link p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.auth-switch-link a {
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.auth-switch-link a:hover {
+  filter: brightness(1.2);
+  text-decoration: underline;
 }

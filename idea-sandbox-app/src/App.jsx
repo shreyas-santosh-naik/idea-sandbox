@@ -12,7 +12,7 @@ import BackgroundParticles from './components/BackgroundParticles.jsx';
 export default function App() {
   return (
     <>
-      <BackgroundParticles />
+      <BackgroundParticles count={600} />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
